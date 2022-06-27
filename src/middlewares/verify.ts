@@ -8,7 +8,7 @@ export function verifyToken(req: Request, res: Response, next: NextFunction) {
     const token = (authHeader as string).split(" ")[1];
     jwt.verify(token, config.jwt, (err, user) => {
       if (err) {
-        res.status(404).json("invalid token");
+        res.status(404).json(err);
       } else {
         req.user = user;
       }

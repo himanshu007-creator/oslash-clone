@@ -6,6 +6,7 @@ import cors from "cors";
 import { router } from "./routes/loginRoutes";
 import { Statsrouter } from "./routes/analyticsRoute";
 import { Linkrouter } from "./routes/LinkRoutes";
+import { Mainouter } from "./routes/MainRouter";
 const app = express();
 app.use(
   cors({
@@ -20,7 +21,7 @@ app.listen(port, () => {
   db();
 
   // auth routes
-  app.use("/o", Linkrouter);
+  app.use("/o", Mainouter);
   app.use("/api/auth", router);
   app.use("/api/performance", Statsrouter);
   app.use("/api/user", Linkrouter);

@@ -5,10 +5,8 @@ import {
   getLinks,
   deleteLink,
   searchLinks,
-  mainLink,
 } from "../controllers/link";
-Linkrouter.get("/:id", verifyToken, mainLink);
 Linkrouter.post("/create", verifyToken, createUrl);
 Linkrouter.get("/links", verifyToken, getLinks);
-Linkrouter.delete("/delete", verifyToken, deleteLink);
-Linkrouter.post("/search", verifyToken, searchLinks);
+Linkrouter.delete("/delete/:short", verifyToken, deleteLink);
+Linkrouter.get("/search", verifyToken, searchLinks);

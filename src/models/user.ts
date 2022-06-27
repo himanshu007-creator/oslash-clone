@@ -12,6 +12,7 @@ export interface ShortURL extends Document {
       url: string;
       tags?: string[];
       visits: Number;
+      created_at: String;
     }
   ];
 }
@@ -45,6 +46,7 @@ const schema = new mongoose.Schema({
         type: Number,
         default: 0,
       },
+      created_at: { type: Date, required: true, default: new Date() },
     },
   ],
 });
