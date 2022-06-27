@@ -11,8 +11,7 @@ This is a simple clone of <a href="https://www.oslash.com/">oslash</a>. Making t
 
 ## How to setup project?
 
-clone this repo and in the root folder, 
-Create a config file as follow.
+clone this repo and in the root folder, Create a config file as follow. create <code>config/config.ts</code>
 
 <pre>
 export default {
