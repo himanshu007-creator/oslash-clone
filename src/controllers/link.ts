@@ -28,7 +28,6 @@ export async function mainLink(req: Request, res: Response) {
       { username: username, "links.shortlink": ShortLink },
       { $inc: { "links.$.visits": 1 } }
     );
-    console.log(result);
     res.redirect(rdrect);
   } else {
     res.status(400).json("Not existing");
@@ -63,7 +62,7 @@ export async function createUrl(req: Request, res: Response) {
       );
       res.status(201).json(result);
     } else {
-      res.status(400).json("Already exists");
+      res.status(400).json("Short URL of same name already exixts");
     }
   }
 }
@@ -163,7 +162,6 @@ export async function searchLinks(req: Request, res: Response) {
       const result = urls.filter((e: any) => {
         return e.shortlink == short;
       });
-      console.log(result);
       res.status(200).json(result);
     } else if (tag !== null) {
       const Tagresult = urls.filter((e: any) => {

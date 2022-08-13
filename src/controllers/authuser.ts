@@ -52,7 +52,6 @@ export async function loginUser(req: Request, res: Response) {
       .status(200)
       .json({ accesstoken: AccessToken, refreshtoken: refreshtoken });
   } catch (err) {
-    console.log(err);
     res.status(400).json(err);
   }
 }
@@ -65,10 +64,9 @@ export async function registerUser(req: Request, res: Response) {
 
   try {
     const saveuser: any = await user.save();
-    console.log("USer registered");
+    console.log("User registered");
     res.status(200).json(saveuser);
   } catch (err) {
-    console.log(err);
     res.status(500).json(err);
   }
 }
