@@ -13,7 +13,8 @@
         "yup": "^0.32.11"
     },
     "scripts": {
-        "dev": "nodemon --config nodemon.json src/app.ts"
+        "dev": "nodemon --config nodemon.json src/app.ts",
+        "start": "npm run build && node ./build/index.js"
     },
     "devDependencies": {
         "@types/body-parser": "^1.19.2",

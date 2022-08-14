@@ -173,7 +173,31 @@ export async function searchLinks(req: Request, res: Response) {
     res.status(400).json("USER DON'T EXIXT");
   }
 }
-//   db.survey.find({
-//     results: { $elemMatch: { product: "xyz", score: { $gte: 8 } } },
-//   });
-// }
+
+// In progress
+export async function updateLink(req: Request, res: Response) {
+  const short = req.body.shortlink || null;
+  const newLink = req.body.newlink || null;
+  const ShortLink = req.params["id"];
+  const username = await req.user.username;
+  const userfound: any = await shortUrl.findOne({ username: username });
+  const urls = userfound.links;
+  let found = false;
+  var ans: any;
+  urls.forEach((element: any) => {
+    if (element.shortlink === ShortLink) {
+      found = true;
+      ans = element;
+    }
+  });
+  if (found) {
+    const rdrect = ans.url;
+    var result = await shortUrl.updateOne(
+      { username: username, "links.shortlink": ShortLink },
+      { $inc: { "links.$.visits": 1 } }
+    );
+    res.redirect(rdrect);
+  } else {
+    res.status(400).json("Not existing");
+  }
+}

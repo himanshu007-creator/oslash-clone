@@ -1,5 +1,5 @@
-export const Mainouter = require("express").Router();
+export const MainRouter = require("express").Router();
 import { verifyToken } from "../middlewares/verify";
 import { mainLink } from "../controllers/link";
 
-Mainouter.get("/:id", verifyToken, mainLink);
+MainRouter.get("/:id", verifyToken, mainLink);
