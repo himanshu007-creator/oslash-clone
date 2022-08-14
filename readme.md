@@ -1,6 +1,7 @@
+![](assets/oslash.png)
 # Oslash Backend
 
-Backen implementation of a personalised URL manager.
+Backend implementation of a personalised URL manager.
 
 ## Getting Started
 
@@ -27,7 +28,7 @@ now navigate to root and install the dependencies
 ```git
 cd oslash-clone
 ```
-```git
+```npm
 npm install
 ```
 Now our project is ready but we need to create a Config file. In root, create a folder named config and inside it create a file <code>config.js</code> and store following credentials
@@ -42,6 +43,31 @@ export default {
   corsOrigin: "http://localhost:3000",
 };
 ```
+Now simply run the development version of your project
+```git
+npm run dev
+```
+
+### endpoints available
+<code>GET /o/:id</code> : redirects after geting full link from short link
+
+ <code>POST /api/auth/login</code>: logins user based on user credentials
+
+ <code>POST /api/auth/register</code>: Reigster new user
+
+ <code>POST /api/auth/token</code>: provide access token using refresh token
+
+ <code>DELETE /api/auth/logout</code>: revokes access from refreshtoken
+
+  <code>POST /api/user/create</code>: creates new short url for user
+  
+<code>GET /api/user/links</code>: provides all user links with additional sorting based on <code>shortlink</code> or <code>create_at</code> property
+
+ <code>DELETE /api/user/:short</code>: deletes a link 
+
+ <code>GET /api/user/search</code>: search user based on <code>shortUrl</code> or <code>tag</code>
+
+ <code>GET /api/performance</code> provide URL stats of individual user [under progress]
 
 ### WIP 
 - Updaating route to update shortURL
