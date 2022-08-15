@@ -176,9 +176,9 @@ export async function searchLinks(req: Request, res: Response) {
 
 // In progress
 export async function updateLink(req: Request, res: Response) {
-  const short = req.body.shortlink || null;
-  const newLink = req.body.newlink || null;
-  const ShortLink = req.params["id"];
+  // const short = req.body.shortlink || req.params["id"];
+  const newShort = req.body.newlink || null;
+  const ShortLink = req.params.id;
   const username = await req.user.username;
   const userfound: any = await shortUrl.findOne({ username: username });
   const urls = userfound.links;
@@ -190,13 +190,19 @@ export async function updateLink(req: Request, res: Response) {
       ans = element;
     }
   });
+  console.log(found);
   if (found) {
     const rdrect = ans.url;
     var result = await shortUrl.updateOne(
       { username: username, "links.shortlink": ShortLink },
-      { $inc: { "links.$.visits": 1 } }
+      { $inc: { "links.$.visits": 1 } },
+      {
+        $set: {
+          "links.$.shorturl": newShort,
+        },
+      }
     );
-    res.redirect(rdrect);
+    res.status(200).json(result);
   } else {
     res.status(400).json("Not existing");
   }
