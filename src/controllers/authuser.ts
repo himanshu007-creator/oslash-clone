@@ -25,7 +25,11 @@ export function generateToken(req: Request, res: Response) {
     const Token: token = {
       username: user.username,
     };
-    const AccessToken: any = jwt.sign(Token, config.jwt, { expiresIn: "10m" });
+    // code modified for demo purpose only, uncomment incase of actual use
+
+    /* const AccessToken: any = jwt.sign(Token, config.jwt, { expiresIn: "10m" });*/
+    const AccessToken: any = jwt.sign(Token, config.jwt);
+
     res.status(200).json({ accessToken: AccessToken });
   });
 }
@@ -47,6 +51,7 @@ export async function loginUser(req: Request, res: Response) {
     };
     const AccessToken: any = jwt.sign(Token, config.jwt, { expiresIn: "10m" });
     const refreshtoken: any = jwt.sign(Token, config.jwt);
+    refreshTokens.push(refreshtoken);
     const { password, ...others } = user._doc;
     res
       .status(200)
@@ -63,9 +68,12 @@ export async function registerUser(req: Request, res: Response) {
   });
 
   try {
-    const saveuser: any = await user.save();
-    console.log("User registered");
-    res.status(200).json(saveuser);
+    const exist: any = await shortUrl.findOne({ username: req.body.username });
+    if (exist === null) {
+      const saveuser: any = await user.save();
+      console.log("User registered");
+      res.status(200).json(saveuser);
+    }
   } catch (err) {
     res.status(500).json(err);
   }

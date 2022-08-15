@@ -21,6 +21,7 @@ const schema = new mongoose.Schema({
   username: {
     type: String,
     required: true,
+    index: { unique: true, dropDups: true },
   },
   password: {
     type: String,
@@ -49,6 +50,7 @@ const schema = new mongoose.Schema({
       created_at: { type: Date, required: true, default: new Date() },
     },
   ],
+  default: [],
 });
 
 const shortUrl = mongoose.model<ShortURL>("shortUrl", schema);

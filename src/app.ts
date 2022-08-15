@@ -15,9 +15,8 @@ app.use(
 );
 app.use(bodyParser.json());
 
-const port = config.port;
-app.listen(port, () => {
-  console.log(port);
+app.listen(config.port, () => {
+  console.log(`Server started @port:${config.port}`);
   db();
 
   // auth routes
